@@ -7,24 +7,24 @@
 
     <body>
             <div id="nome"></div>
-
-            <?php // Prever sucesso ou falha usando o metodo .then ?>
+            <div id="mensagem"></div>
 
         <script src="jquery.js"></script>
         <script>
+           // .done   - Prever sucesso de carregamento
+           // .fail   - Prever falha de carregamento
+           // .always - Faz a chamada indepentende do sucesso ou falha
+
             $.ajax({
                 url:'nome.php'
-            }).then(sucesso, falha);
-            
-            function sucesso(valor) {
+            }).done(function (valor) {
                 $('div#nome').html(valor);
-                
-            }
-            
-            function falha() {
+            }).fail(function () {
                 $('div#nome').html("Falha no carregamento");
-                
-            }
+            }).always(function () {
+                $('div#mensagem').html("Mensagem de qualquer coisa");
+
+            })
 
         </script>
     </body>
