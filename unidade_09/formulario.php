@@ -45,13 +45,13 @@
                 
                 <form id="formulario_transportadora">
                     <label for="nometransportadora">Nome da Transportadora</label>
-                    <input type="text" value="<?php echo utf8_encode($info_transportadora["nometransportadora"])  ?>" name="nometransportadora" id="nometransportadora">
+                    <input type="text" value="<?php echo $info_transportadora["nometransportadora"]  ?>" name="nometransportadora" id="nometransportadora">
 
                     <label for="endereco">Endereço</label>
-                    <input type="text" value="<?php echo utf8_encode($info_transportadora["endereco"])  ?>" name="endereco" id="endereco">
+                    <input type="text" value="<?php echo $info_transportadora["endereco"]  ?>" name="endereco" id="endereco">
 
                     <label for="cidade">Cidade</label>
-                    <input type="text" value="<?php echo utf8_encode($info_transportadora["cidade"])  ?>" name="cidade" id="cidade">
+                    <input type="text" value="<?php echo $info_transportadora["cidade"]  ?>" name="cidade" id="cidade">
 
                     <label for="estados">Estados</label>
                     <select id="estados" name="estados"> 
@@ -62,13 +62,13 @@
                                 if($meuestado == $estado_principal) {
                         ?>
                             <option value="<?php echo $linha["estadoID"] ?>" selected>
-                                <?php echo utf8_encode($linha["nome"]) ?>
+                                <?php echo $linha["nome"] ?>
                             </option>
                         <?php
                                 } else {
                         ?>
                             <option value="<?php echo $linha["estadoID"] ?>" >
-                                <?php echo utf8_encode($linha["nome"]) ?>
+                                <?php echo $linha["nome"] ?>
                             </option>                        
                         <?php 
                                 }
@@ -96,6 +96,26 @@
             });
             
             function alterarFormulario(dados) {
+                $.ajax({
+                    type:"POST",
+                    data:dados.serialize()
+                    url:"alterar_transportador.php",
+                    async:false
+                }).done(function (data) {
+                    $sucesso = $.parseJSON(data)["sucesso"];
+                    $mensagem = $.parseJSON(data)["mensagem"];
+
+                    if($sucesso){
+                        $('#mensagem p ').html($mensagem);
+                    } else {
+                        $('#mensagem p ').html($mensagem);
+                    }
+                }).fail(function () {
+                    $('#mensagem p ').html("Erro no sistema tente novamente");
+                    
+                }).always(function () {
+                    $('#mensagem').show();
+                })
 
             }
         </script>

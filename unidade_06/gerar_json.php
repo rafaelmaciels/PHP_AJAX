@@ -24,17 +24,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     // Passo 2 - Testar Conexão
     //  if (mysqli_connect_errno()){
     //    die("Conexão falhou: " . mysqli_connect_errno() );

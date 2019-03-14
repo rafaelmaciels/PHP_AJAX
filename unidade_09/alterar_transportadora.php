@@ -6,9 +6,9 @@
     }
 
     if(isset($_POST["nometransportadora"])) {
-        $nome       = utf8_decode($_POST["nometransportadora"]);
-        $endereco   = utf8_decode($_POST["endereco"]);
-        $cidade     = utf8_decode($_POST["cidade"]);
+        $nome       = $_POST["nometransportadora"];
+        $endereco   = $_POST["endereco"];
+        $cidade     = $_POST["cidade"];
         $estado     = $_POST["estados"];
         $tID        = $_POST["transportadoraID"];
         
