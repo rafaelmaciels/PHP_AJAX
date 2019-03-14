@@ -42,7 +42,7 @@
                             while($linha = mysqli_fetch_assoc($lista_estados)) {
                         ?>
                             <option value="<?php echo $linha["estadoID"];  ?>">
-                                <?php echo utf8_encode($linha["nome"]);  ?>
+                                <?php echo $linha["nome"];  ?>
                             </option>
                         <?php
                             }
@@ -61,6 +61,38 @@
         
         <script src="jquery.js"></script>
         <script>
+            $('#formulario_transportadora').submit(function (e) {
+                e.preventDefault();
+                var formulario = $(this);
+                var retorno = inserirFormulario(formulario)
+            });
+
+                function inserirFormulario(dados) {
+                    $.ajax({
+                        type:"POST",
+                        data:dados.serialize(),
+                        url:"inserir_transportadora.php",
+                        async:false
+                    }).then(sucesso, falha);
+                        function sucesso(data) {
+                            $sucesso = $.parseJSON(data)["sucesso"];
+                            $mensagem = $.parseJSON(data)["sucesso"];
+
+                            $('#mensagem').show();
+
+                            if ($sucesso) {
+                                $('#mensagem').html($mensagem);
+                            } else {
+                                $('#mensagem').html($mensagem);
+                            }
+
+                        }
+                        function falha() {
+                            console.log("Error");
+
+                        }
+
+                }
         </script>
     </body>
 </html>
